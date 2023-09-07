@@ -1,0 +1,16 @@
+[versions]
+kotlin = "1.9.0"
+pluginPublish = "1.2.0"
+koin = "3.4.3"
+mockk = "1.12.1"
+spotless = "6.18.0"
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin"}
+pluginPublish = { id = "com.gradle.plugin-publish", version.ref = "pluginPublish"}
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+
+[libraries]
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-test = { group = "io.insert-koin", name = "koin-test-junit5", version.ref = "koin" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
