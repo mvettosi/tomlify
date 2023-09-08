@@ -38,7 +38,8 @@ gradlePlugin {
 }
 
 gradlePlugin {
-
+  website.set(property("WEBSITE").toString())
+  vcsUrl.set(property("VCS_URL").toString())
 }
 
 tasks.create("setupPluginUploadFromEnvironment") {
