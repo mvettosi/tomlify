@@ -1,6 +1,7 @@
 package io.github.mvettosi.tomlify.domain.usecase.update
 
 import io.github.mvettosi.tomlify.domain.model.Dependency
+import io.github.mvettosi.tomlify.domain.model.TomlHeader
 import io.github.mvettosi.tomlify.domain.model.VersionString
 import io.github.mvettosi.tomlify.domain.source.CatalogSource
 
@@ -34,15 +35,15 @@ private fun MutableList<String>.addVersionFrom(dependency: Dependency) {
       set(existingVersionLineIndex, newVersionLine)
     }
   } else {
-    add(insertionFor(CatalogSource.TomlHeader.VERSIONS), newVersionLine)
+    add(insertionFor(TomlHeader.VERSIONS), newVersionLine)
   }
 }
 
 private fun MutableList<String>.addDeclarationFrom(dependency: Dependency) {
   val insertion =
       when (dependency) {
-        is Dependency.Library -> insertionFor(CatalogSource.TomlHeader.LIBRARIES)
-        is Dependency.Plugin -> insertionFor(CatalogSource.TomlHeader.PLUGINS)
+        is Dependency.Library -> insertionFor(TomlHeader.LIBRARIES)
+        is Dependency.Plugin -> insertionFor(TomlHeader.PLUGINS)
       }
   val newTomlLine = dependency.toTomlLine()
   if (!contains(newTomlLine)) {
@@ -50,7 +51,7 @@ private fun MutableList<String>.addDeclarationFrom(dependency: Dependency) {
   }
 }
 
-private fun List<String>.insertionFor(startSection: CatalogSource.TomlHeader): Int {
+private fun List<String>.insertionFor(startSection: TomlHeader): Int {
   for (i in indexOf(startSection.toString()) until size) {
     if (get(i).isBlank()) return i
   }

@@ -1,6 +1,7 @@
 package io.github.mvettosi.tomlify.domain.usecase.update
 
 import io.github.mvettosi.tomlify.domain.model.Dependency
+import io.github.mvettosi.tomlify.domain.model.TomlHeader
 import io.github.mvettosi.tomlify.domain.model.VersionString
 import io.github.mvettosi.tomlify.domain.source.CatalogSource
 import kotlin.test.assertEquals
@@ -24,15 +25,15 @@ class UpdateCatalogTest {
             Dependency.Library(group = "one.two", name = "three", version = VersionString("1.1.1")))
     val expected =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
       """
             .trimIndent()
 
@@ -48,15 +49,15 @@ class UpdateCatalogTest {
     // Arrange
     testCatalogSource.catalog =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
       """
             .trimIndent()
     val dependencies =
@@ -64,17 +65,17 @@ class UpdateCatalogTest {
             Dependency.Library(group = "four.five", name = "six", version = VersionString("2.2.2")))
     val expected =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
         four-five-six-version = "2.2.2"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
         four-five-six = { group = "four.five", name = "six", version.ref = "four-five-six-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
       """
             .trimIndent()
 
@@ -90,17 +91,17 @@ class UpdateCatalogTest {
     // Arrange
     testCatalogSource.catalog =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
         four-five-six-version = "2.2.2"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
         four-five-six = { group = "four.five", name = "six", version.ref = "four-five-six-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
       """
             .trimIndent()
     val dependencies =
@@ -108,17 +109,17 @@ class UpdateCatalogTest {
             Dependency.Library(group = "one.two", name = "three", version = VersionString("1.1.2")))
     val expected =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.2"
         four-five-six-version = "2.2.2"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
         four-five-six = { group = "four.five", name = "six", version.ref = "four-five-six-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
       """
             .trimIndent()
 
@@ -136,14 +137,14 @@ class UpdateCatalogTest {
         listOf(Dependency.Plugin(id = "one.two.three", version = VersionString("1.1.1")))
     val expected =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
         one-two-three = { id = "one.two.three", version.ref = "one-two-three-version" }
       """
             .trimIndent()
@@ -160,37 +161,37 @@ class UpdateCatalogTest {
     // Arrange
     testCatalogSource.catalog =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
         four-five-six-version = "2.2.2"
         seven-eight-version = "3.3.3"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
         four-five-six = { group = "four.five", name = "six", version.ref = "four-five-six-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
         seven-eight = { id = "seven.eight", version.ref = "seven-eight-version" }
       """
             .trimIndent()
     val dependencies = listOf(Dependency.Plugin(id = "nine.ten", version = VersionString("4.4.4")))
     val expected =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
         four-five-six-version = "2.2.2"
         seven-eight-version = "3.3.3"
         nine-ten-version = "4.4.4"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
         four-five-six = { group = "four.five", name = "six", version.ref = "four-five-six-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
         seven-eight = { id = "seven.eight", version.ref = "seven-eight-version" }
         nine-ten = { id = "nine.ten", version.ref = "nine-ten-version" }
       """
@@ -208,19 +209,19 @@ class UpdateCatalogTest {
     // Arrange
     testCatalogSource.catalog =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
         four-five-six-version = "2.2.2"
         seven-eight-version = "3.3.3"
         nine-ten-version = "4.4.4"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
         four-five-six = { group = "four.five", name = "six", version.ref = "four-five-six-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
         seven-eight = { id = "seven.eight", version.ref = "seven-eight-version" }
         nine-ten = { id = "nine.ten", version.ref = "nine-ten-version" }
       """
@@ -229,19 +230,19 @@ class UpdateCatalogTest {
         listOf(Dependency.Plugin(id = "seven.eight", version = VersionString("3.4.3")))
     val expected =
         """
-        ${CatalogSource.TomlHeader.VERSIONS}
+        ${TomlHeader.VERSIONS}
         one-two-three-version = "1.1.1"
         four-five-six-version = "2.2.2"
         seven-eight-version = "3.4.3"
         nine-ten-version = "4.4.4"
 
-        ${CatalogSource.TomlHeader.BUNDLES}
+        ${TomlHeader.BUNDLES}
 
-        ${CatalogSource.TomlHeader.LIBRARIES}
+        ${TomlHeader.LIBRARIES}
         one-two-three = { group = "one.two", name = "three", version.ref = "one-two-three-version" }
         four-five-six = { group = "four.five", name = "six", version.ref = "four-five-six-version" }
 
-        ${CatalogSource.TomlHeader.PLUGINS}
+        ${TomlHeader.PLUGINS}
         seven-eight = { id = "seven.eight", version.ref = "seven-eight-version" }
         nine-ten = { id = "nine.ten", version.ref = "nine-ten-version" }
       """
