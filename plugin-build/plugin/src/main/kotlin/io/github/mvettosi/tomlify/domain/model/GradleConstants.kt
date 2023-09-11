@@ -10,7 +10,7 @@ sealed class GradleConstants(
     get() = supportedLibraryDeclarations + supportedPluginDeclarations
 }
 
-data object GradleKtsConstants :
+object GradleKtsConstants :
     GradleConstants(
         supportedLibraryDeclarations =
             listOf(
@@ -24,7 +24,7 @@ data object GradleKtsConstants :
         supportedPluginDeclarations = listOf(" version(", " version "),
         supportedPluginApplications = listOf("id("))
 
-data object GradleGroovyConstants :
+object GradleGroovyConstants :
     GradleConstants(
         supportedLibraryDeclarations = listOf(),
         libraryExclusions = listOf("//no-tomlify"),
