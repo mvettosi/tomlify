@@ -19,6 +19,7 @@ object GradleKtsConstants :
                 "ompile(",
                 "kapt(",
                 "ksp(",
+                "coreLibraryDesugaring(",
             ),
         libraryExclusions = listOf("project(", "//no-tomlify"),
         supportedPluginDeclarations = listOf(" version(", " version "),
