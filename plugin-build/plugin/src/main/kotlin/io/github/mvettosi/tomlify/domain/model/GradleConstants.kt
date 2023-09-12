@@ -20,6 +20,7 @@ object GradleKtsConstants :
                 "kapt(",
                 "ksp(",
                 "coreLibraryDesugaring(",
+                "kaptAndroidTest"
             ),
         libraryExclusions = listOf("project(", "//no-tomlify"),
         supportedPluginDeclarations = listOf(" version(", " version "),
